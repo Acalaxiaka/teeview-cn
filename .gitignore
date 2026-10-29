@@ -1,0 +1,8 @@
+android/build/
+android-keystore/password.txt
+android-keystore/release.jks
+*.apk
+*.apk.idsig
+.DS_Store
+*.bak
+node_modules/
