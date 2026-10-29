@@ -10,8 +10,8 @@ h1{font-size:15px;margin:0;font-weight:600;white-space:nowrap}
 .tabs{display:flex;flex-wrap:wrap;gap:3px;justify-content:flex-end}
 .tabs button,.tg{background:#2a2a2e;color:#ccc;border:1px solid #444;border-radius:14px;padding:5px 10px;font-size:12px}
 .tabs button.on,.tg.on{background:#2a8ae0;color:#fff;border-color:#2a8ae0}
-#bar,#pathBar,#quizBar{display:flex;justify-content:space-between;align-items:center;padding:4px 10px 6px;background:#141416;font-size:12px;flex-wrap:wrap;gap:4px}
-#pathBar>span:last-child,#quizBar>span:last-child,#bar>span:last-child{display:flex;flex-wrap:wrap;gap:4px;align-items:center;justify-content:flex-end}
+#bar,#pathBar,#extraBar{display:flex;justify-content:space-between;align-items:center;padding:4px 10px 6px;background:#141416;font-size:12px;flex-wrap:wrap;gap:4px}
+#pathBar>span:last-child,#extraBar>span:last-child,#bar>span:last-child{display:flex;flex-wrap:wrap;gap:4px;align-items:center;justify-content:flex-end}
 #stage{display:flex;gap:4px;padding:4px;background:#0a0a0c}
 #v3d,#vx{position:relative;flex:1;aspect-ratio:1/1;max-height:42vh;overflow:hidden;touch-action:pan-y;border-radius:4px}
 #v3d{background:radial-gradient(ellipse at 40% 35%,#1a2838,#0c1018 70%)}
@@ -20,19 +20,26 @@ h1{font-size:15px;margin:0;font-weight:600;white-space:nowrap}
 .cap{position:absolute;left:6px;top:4px;font-size:11px;color:#ccc;pointer-events:none;text-shadow:0 0 3px #000;z-index:2}
 #readout{position:absolute;right:6px;top:4px;font-size:13px;font-weight:700;color:#7ec8ff;text-shadow:0 0 4px #000;pointer-events:none;text-align:right;line-height:1.25;z-index:2}
 #vxBadge{position:absolute;left:6px;bottom:6px;font-size:11px;color:#9fd0ff;text-shadow:0 0 3px #000;z-index:2;pointer-events:none}
+#vxLabs{position:absolute;inset:0;pointer-events:none;z-index:3}
+#vxLabs span{position:absolute;font-size:10px;font-weight:700;color:#ffe84d;text-shadow:0 0 3px #000,0 0 2px #000;transform:translate(-50%,-50%);white-space:nowrap}
 .fsb{position:absolute;right:6px;bottom:6px;width:34px;height:34px;border-radius:8px;border:1px solid #555;background:rgba(0,0,0,.5);color:#fff;font-size:17px;z-index:4;touch-action:manipulation}
 .fsb.zr{right:46px;font-size:12px}
 #v3d.full,#vx.full{position:fixed;inset:0;max-height:none;aspect-ratio:auto;z-index:50;border-radius:0}
 .ctrl{padding:6px 8px;font-size:11px}
 .ctrl .r{display:flex;align-items:center;gap:4px;margin:4px 0}
 .ctrl input[type=range]{flex:1;min-width:0}
-.ctrl .lab{min-width:52px;color:#9aa4b2}
-.ctrl .val{min-width:44px;text-align:right;color:#7ec8ff}
+.ctrl .lab{min-width:58px;color:#9aa4b2}
+.ctrl .val{min-width:48px;text-align:right;color:#7ec8ff}
+#guide{display:none;padding:6px 10px;font-size:12px;background:#0e1a28;border-top:1px solid #1e3a55;color:#9fd0ff;line-height:1.45}
+#guide.on{display:block}
+#guide b{color:#5eb0ff}
+#guide .steps{margin-top:4px;color:#c8e0f8}
 #tip{padding:6px 10px;font-size:12px;color:#9fd0ff;min-height:36px;background:#12161e;line-height:1.45}
 #presets{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:6px 8px}
 #presets button{background:#222226;color:#eee;border:1px solid #3a3a40;border-radius:7px;padding:6px 3px;font-size:11px;line-height:1.25;text-align:center}
 #presets button small{display:block;color:#888;font-size:9px;margin-top:2px}
 #presets button.on{border-color:#2a8ae0;background:#102838}
+#presets button.tte{border-color:#3a5a40}
 #segMap{display:flex;gap:4px;padding:4px 8px 2px;flex-wrap:wrap;align-items:center;font-size:11px}
 #segMap .s{padding:3px 7px;border-radius:5px;border:1px solid #444;background:#1a1a1e;color:#aaa}
 #segMap .s.on{background:#c45a2a;color:#fff;border-color:#e08a2a;font-weight:600}
@@ -45,28 +52,17 @@ body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-i
 #v3d.zm,#vx.zm,#v3d.full,#vx.full{touch-action:none}
 button,.tg,#presets button{touch-action:manipulation}
 input[type=range]{touch-action:pan-y}
-@media (min-width:720px){
- #stage{gap:6px;padding:6px}
- #v3d,#vx{max-height:52vh}
- #presets{grid-template-columns:repeat(4,1fr)}
-}
-@media (max-width:520px){
- #stage{flex-direction:column}
- #v3d,#vx{max-height:36vh;aspect-ratio:4/3}
- #presets{grid-template-columns:repeat(3,1fr)}
- h1{font-size:13px}
-}
+@media (min-width:720px){#stage{gap:6px;padding:6px}#v3d,#vx{max-height:52vh}#presets{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:520px){#stage{flex-direction:column}#v3d,#vx{max-height:36vh;aspect-ratio:4/3}#presets{grid-template-columns:repeat(3,1fr)}h1{font-size:13px}}
 @media (orientation:landscape) and (min-aspect-ratio:5/4){
  body{display:grid;grid-template-columns:minmax(0,1fr) clamp(300px,36vw,460px);grid-template-rows:auto auto 1fr;grid-template-areas:"st hd" "st a" "st b";height:100vh;height:100dvh;overflow:hidden}
  header{grid-area:hd}#sideA{grid-area:a}#sideB{grid-area:b;overflow-y:auto;-webkit-overflow-scrolling:touch;min-height:0}
  #stage{grid-area:st;flex-direction:row;align-items:center;min-height:0}
  #v3d,#vx{max-height:none;height:100%;aspect-ratio:auto}
- #presets{grid-template-columns:repeat(3,1fr)}
- #toTop{display:none}
+ #presets{grid-template-columns:repeat(3,1fr)}#toTop{display:none}
 }
 #quizPanel{display:none;padding:8px 10px;background:#1a1220;border-top:1px solid #3a2a4a;font-size:12px;line-height:1.45}
-#quizPanel.on{display:block}
-#quizPanel b{color:#e0a0ff}
+#quizPanel.on{display:block}#quizPanel b{color:#e0a0ff}
 #quizBtns{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
 #quizBtns button{background:#2a2230;color:#eee;border:1px solid #554;border-radius:7px;padding:6px 10px;font-size:12px}
 #quizBtns button.ok{border-color:#3a8;background:#1a3a2a}
@@ -85,7 +81,8 @@ input[type=range]{touch-action:pan-y}
  <button class="tg on" id="tgH">半透心</button>
  <button class="tg on" id="tgP">探头</button>
  <button class="tg on" id="tgM">二尖瓣图</button>
- <button class="tg" id="tgPl">切面</button>
+ <button class="tg on" id="tgPl">切面</button>
+ <button class="tg on" id="tgBody">体表</button>
 </span></div>
 <div id="pathBar"><span>病理示意：</span><span id="paths">
  <button class="tg on" data-p="none">无</button>
@@ -97,24 +94,27 @@ input[type=range]{touch-action:pan-y}
 </div>
 <div id="stage">
  <div id="v3d"><div class="cap">3D · 探头与解剖</div><div id="readout"></div></div>
- <div id="vx"><div class="cap">超声切面</div><div id="vxBadge"></div></div>
+ <div id="vx"><div class="cap">切面（解剖 ↔ 超声）</div><div id="vxLabs"></div><div id="vxBadge"></div></div>
 </div>
 <div id="sideB">
 <div class="ctrl">
+ <div class="r"><span class="lab">体表透明</span><input id="bodyFade" type="range" min="0" max="100" value="100"><span class="val" id="bodyFadeV">体表</span></div>
+ <div class="r"><span class="lab">切面形态</span><input id="morph" type="range" min="0" max="100" value="100"><span class="val" id="morphV">超声</span></div>
  <div class="r"><span class="lab">深度</span><input id="depth" type="range" min="0" max="100" value="45"><span class="val" id="depthV">中段食管</span></div>
  <div class="r"><span class="lab">前/后屈</span><input id="flex" type="range" min="-60" max="60" value="0"><span class="val" id="flexV">0°</span></div>
  <div class="r"><span class="lab">左右转</span><input id="turn" type="range" min="-90" max="90" value="0"><span class="val" id="turnV">0°</span></div>
  <div class="r"><span class="lab">多平面</span><input id="omni" type="range" min="0" max="180" value="0"><span class="val" id="omniV">0°</span></div>
- <div style="margin-top:4px;color:#777">单指拖动旋转 3D · 双指缩放 · 点预设切面 · 调多平面角</div>
+ <div style="margin-top:4px;color:#777">体表滑条：皮肤/肋骨淡出 · 切面形态：解剖彩切 ↔ 超声灰阶 · 点预设看蓝色引导箭头</div>
 </div>
 <div id="segMap"><span class="lbl">二尖瓣：</span>
  <span class="s" data-seg="A1">A1</span><span class="s" data-seg="A2">A2</span><span class="s" data-seg="A3">A3</span>
  <span class="s" data-seg="P1">P1</span><span class="s" data-seg="P2">P2</span><span class="s" data-seg="P3">P3</span>
 </div>
-<div id="tip">选择 ASE/SCA 标准 TEE 切面，或手动调节探头深度 / 屈伸 / 扭转 / 多平面角度。</div>
+<div id="guide"><b>探头引导</b><div class="steps" id="guideSteps"></div></div>
+<div id="tip">选择 ASE/SCA 标准 TEE 切面，或手动调节探头。可淡出体表、切换解剖/超声切面形态。</div>
 <div id="quizPanel"><div id="quizQ"></div><div id="quizBtns"></div></div>
 <div id="presets"></div>
-<footer>仅供教学参考 · 简化示意模型 · ASE/SCA TEE 标准切面 · v1.0.2</footer>
+<footer>仅供教学参考 · 简化示意模型 · ASE/SCA TEE + 轻量剑突下 TTE · v1.0.3</footer>
 </div>
 <button id="toTop">顶部</button>
 <script src="vendor/three.min.js"></script>
